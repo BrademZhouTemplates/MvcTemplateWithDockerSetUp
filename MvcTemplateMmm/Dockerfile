@@ -8,6 +8,10 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["MvcTemplateMmm/MvcTemplateMmm.csproj", "MvcTemplateMmm/"]
+COPY ["Template.Models/Template.Models.csproj", "Template.Models/"]
+COPY ["Template.Services/Template.Services.csproj", "Template.Services/"]
+COPY ["Template.Data/Template.Data.csproj", "Template.Data/"]
+
 RUN dotnet restore "MvcTemplateMmm/MvcTemplateMmm.csproj"
 COPY . .
 WORKDIR "/src/MvcTemplateMmm"

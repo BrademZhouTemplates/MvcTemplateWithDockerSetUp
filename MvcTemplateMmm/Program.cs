@@ -15,12 +15,21 @@ namespace MvcTemplateMmm
         {
             CreateHostBuilder(args).Build().Run();
         }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            var port = Environment.GetEnvironmentVariable("PORT");
+            return Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    //Heroku testing
+
+                    webBuilder.UseStartup<Startup>();
+                    //webBuilder.UseUrls("http://*:" + port);
+
+                    //Non heroku testing :)
+
                     webBuilder.UseStartup<Startup>();
                 });
+        }
     }
 }
